@@ -1,0 +1,46 @@
+#include <iostream>
+
+class GradesManager {
+public:
+    GradesManager(int size);
+    double calculateAverage();
+    ~GradesManager();
+
+private:
+    int* grades;
+    int size;
+};
+
+// Constructor
+GradesManager::GradesManager(int size)
+    : size(size), grades(new int[size]) {
+    for (int i = 0; i < size; ++i) {
+        grades[i] = i + 1;
+    }
+    std::cout << "Grades initialized." << std::endl;
+}
+
+// Method
+double GradesManager::calculateAverage() {
+    int sum = 0;
+    for (int i = 0; i < size; ++i) {
+        sum += grades[i];
+    }
+    return (sum * 1.0) / size;
+}
+
+// Destructor
+GradesManager::~GradesManager() {
+    delete[] grades;
+    std::cout << "Grades memory released." << std::endl;
+}
+
+int main() {
+    GradesManager* manager = new GradesManager(5);
+
+    double avg = manager->calculateAverage();
+    std::cout << "Average grade: " << avg << std::endl;
+
+    delete manager;
+    return 0;
+}
